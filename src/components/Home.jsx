@@ -1,61 +1,87 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../services/api";
+
 import "./Home.css";
 
 function Home() {
-  const recommendedNannies = [
-    {
-      name: "Sophie Williams",
-      experience: "6 years experience",
-      rating: "5.0",
-      rate: "€15",
-      initials: "SW",
-      color: "peach"
-    },
-    {
-      name: "Emma Johnson",
-      experience: "4 years experience",
-      rating: "4.9",
-      rate: "€13",
-      initials: "EJ",
-      color: "sage"
-    },
-    {
-      name: "Sarah Mitchell",
-      experience: "8 years experience",
-      rating: "4.9",
-      rate: "€14",
-      initials: "SM",
-      color: "lavender"
+  const navigate = useNavigate();
+
+  const [recommendedNannies, setRecommendedNannies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(6);
+
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 6,
+    total: 0,
+    totalPages: 0
+  });
+
+  useEffect(() => {
+    async function loadNannies() {
+      setIsLoading(true);
+      setError("");
+
+      try {
+        const response = await api.get(
+          `/nannies?page=${page}&limit=${pageSize}`
+        );
+
+        setRecommendedNannies(response.data.data);
+        setPagination(response.data.pagination);
+      } catch (error) {
+        console.error("Failed to load nannies:", error);
+
+        if (error.response?.status === 401) {
+          localStorage.removeItem("token");
+          navigate("/");
+          return;
+        }
+
+        setError("Unable to load recommended nannies.");
+      } finally {
+        setIsLoading(false);
+      }
     }
-  ];
+
+    loadNannies();
+  }, [page, pageSize, navigate]);
+
+  function handlePageSizeChange(event) {
+    setPageSize(Number(event.target.value));
+    setPage(1);
+  }
 
   return (
-    <main className="home-page">
-
-      {/* Navigation */}
-      <nav className="home-nav">
+    <div className="home-page">
+      <header className="home-nav">
         <div className="home-logo">
-          <span className="home-logo-icon">♥</span>
+          <span className="home-logo-icon">♡</span>
           <span>NannyMatch</span>
         </div>
 
-        <div className="nav-links">
-          <a href="/home" className="nav-link active">
+        <nav className="nav-links">
+          <button className="nav-link active">
             Dashboard
-          </a>
+          </button>
 
-          <a href="#nannies" className="nav-link">
+          <button className="nav-link">
             Find a nanny
-          </a>
+          </button>
 
-          <a href="#bookings" className="nav-link">
+          <button className="nav-link">
             Bookings
-          </a>
+          </button>
 
-          <a href="#messages" className="nav-link">
+          <button className="nav-link">
             Messages
-            <span className="message-badge">3</span>
-          </a>
-        </div>
+            <span className="message-badge">2</span>
+          </button>
+        </nav>
 
         <div className="nav-profile">
           <div className="profile-avatar">
@@ -63,53 +89,42 @@ function Home() {
           </div>
 
           <div className="profile-info">
-            <span className="profile-name">
+            <strong className="profile-name">
               Jane Doe
-            </span>
+            </strong>
 
             <span className="profile-role">
               Parent
             </span>
           </div>
-
-          <button className="profile-menu">
-            ⋮
-          </button>
         </div>
-      </nav>
+      </header>
 
-      {/* Main content */}
-      <div className="home-content">
-
-        {/* Welcome section */}
+      <main className="home-content">
         <section className="welcome-section">
           <div>
             <p className="welcome-eyebrow">
-              YOUR DASHBOARD
+              Welcome back
             </p>
 
             <h1>
-              Good morning, Jane <span>👋</span>
+              Good morning, Jane!
             </h1>
 
             <p className="welcome-text">
-              Find trusted childcare and manage everything
-              in one simple place.
+              Find the perfect nanny for your family.
             </p>
           </div>
 
           <button className="primary-action">
-            <span>+</span>
             Find a nanny
           </button>
         </section>
 
-        {/* Statistics */}
         <section className="stats-grid">
-
-          <article className="stat-card">
+          <div className="stat-card">
             <div className="stat-icon green">
-              ♥
+              ♡
             </div>
 
             <div>
@@ -120,36 +135,28 @@ function Home() {
               <strong className="stat-value">
                 12
               </strong>
-
-              <span className="stat-detail">
-                +2 this week
-              </span>
             </div>
-          </article>
+          </div>
 
-          <article className="stat-card">
+          <div className="stat-card">
             <div className="stat-icon peach">
               ✓
             </div>
 
             <div>
               <span className="stat-label">
-                Upcoming bookings
+                Bookings
               </span>
 
               <strong className="stat-value">
-                3
+                4
               </strong>
-
-              <span className="stat-detail">
-                Next: Tomorrow
-              </span>
             </div>
-          </article>
+          </div>
 
-          <article className="stat-card">
+          <div className="stat-card">
             <div className="stat-icon purple">
-              ◌
+              ✉
             </div>
 
             <div>
@@ -158,16 +165,12 @@ function Home() {
               </span>
 
               <strong className="stat-value">
-                5
+                2
               </strong>
-
-              <span className="stat-detail">
-                From 3 nannies
-              </span>
             </div>
-          </article>
+          </div>
 
-          <article className="stat-card">
+          <div className="stat-card">
             <div className="stat-icon yellow">
               ★
             </div>
@@ -180,107 +183,148 @@ function Home() {
               <strong className="stat-value">
                 4.9
               </strong>
-
-              <span className="stat-detail">
-                Excellent
-              </span>
             </div>
-          </article>
-
+          </div>
         </section>
 
-        {/* Dashboard columns */}
-        <div className="dashboard-grid">
-
-          {/* Recommended nannies */}
-          <section
-            className="dashboard-card nannies-card"
-            id="nannies"
-          >
+        <section className="dashboard-grid">
+          <div className="dashboard-card recommended-card">
             <div className="section-header">
               <div>
-                <p className="section-eyebrow">
-                  DISCOVER
-                </p>
-
                 <h2>
-                  Recommended nannies
+                  Recommended Nannies
                 </h2>
 
                 <p>
-                  Based on your preferences
+                  Nannies that might be a great match for you
                 </p>
               </div>
 
-              <a
-                href="#nannies"
-                className="view-all"
-              >
-                View all →
-              </a>
+              <div className="page-size-control">
+                <label htmlFor="page-size">
+                  Show
+                </label>
+
+                <select
+                  id="page-size"
+                  value={pageSize}
+                  onChange={handlePageSizeChange}
+                >
+                  <option value={3}>3</option>
+                  <option value={6}>6</option>
+                  <option value={9}>9</option>
+                </select>
+
+                <span>
+                  per page
+                </span>
+              </div>
             </div>
 
             <div className="nanny-list">
+              {isLoading && (
+                <p>
+                  Loading recommended nannies...
+                </p>
+              )}
 
-              {recommendedNannies.map((nanny) => (
-                <article
-                  className="nanny-card"
-                  key={nanny.name}
-                >
-                  <div
-                    className={`nanny-avatar ${nanny.color}`}
+              {error && (
+                <p>
+                  {error}
+                </p>
+              )}
+
+              {!isLoading &&
+                !error &&
+                recommendedNannies.map((nanny) => (
+                  <article
+                    className="nanny-card"
+                    key={nanny.id}
                   >
-                    {nanny.initials}
-                  </div>
-
-                  <div className="nanny-info">
-                    <h3>
-                      {nanny.name}
-                    </h3>
-
-                    <p>
-                      {nanny.experience}
-                    </p>
-
-                    <div className="nanny-rating">
-                      <span>★</span>
-                      {nanny.rating}
+                    <div className="nanny-avatar">
+                      <img
+                        src={nanny.profileImage}
+                        alt={nanny.name}
+                      />
                     </div>
-                  </div>
 
-                  <div className="nanny-rate">
-                    <strong>
-                      {nanny.rate}
-                    </strong>
+                    <div className="nanny-info">
+                      <h3>
+                        {nanny.name}
+                      </h3>
 
-                    <span>
-                      / hour
-                    </span>
-                  </div>
+                      <p>
+                        {nanny.experienceInYears} years experience
+                      </p>
 
-                  <button className="nanny-button">
-                    View
-                  </button>
-                </article>
-              ))}
+                      <div className="nanny-rating">
+                        {nanny.isVerified && (
+                          <>
+                            <span>✓</span>
+                            Verified
+                          </>
+                        )}
+                      </div>
+                    </div>
 
+                    <div className="nanny-rate">
+                      <strong>
+                        €{nanny.hourlyRate}
+                      </strong>
+
+                      <span>
+                        / hour
+                      </span>
+                    </div>
+
+                    <button className="nanny-button">
+                      View
+                    </button>
+                  </article>
+                ))}
             </div>
-          </section>
 
-          {/* Upcoming booking */}
-          <section
-            className="dashboard-card booking-card"
-            id="bookings"
-          >
+            {!isLoading &&
+              !error &&
+              pagination.totalPages > 1 && (
+                <div className="pagination">
+                  <button
+                    className="pagination-button"
+                    onClick={() =>
+                      setPage((currentPage) => currentPage - 1)
+                    }
+                    disabled={page === 1}
+                  >
+                    ← Previous
+                  </button>
+
+                  <span className="pagination-info">
+                    Page {pagination.page} of {pagination.totalPages}
+                  </span>
+
+                  <button
+                    className="pagination-button"
+                    onClick={() =>
+                      setPage((currentPage) => currentPage + 1)
+                    }
+                    disabled={page === pagination.totalPages}
+                  >
+                    Next →
+                  </button>
+                </div>
+              )}
+          </div>
+
+          <div className="dashboard-card">
             <div className="section-header">
               <div>
-                <p className="section-eyebrow">
-                  NEXT UP
-                </p>
-
                 <h2>
-                  Upcoming booking
+                  Upcoming Booking
                 </h2>
+
+                <p>
+                  Your next childcare appointment
+                </p>
               </div>
 
               <span className="confirmed-badge">
@@ -301,23 +345,23 @@ function Home() {
 
               <div>
                 <strong>
-                  Tomorrow
+                  Saturday, 14 September
                 </strong>
 
                 <p>
-                  09:00 – 14:00
+                  09:00 - 14:00
                 </p>
               </div>
             </div>
 
             <div className="booking-nanny">
               <div className="small-avatar">
-                SW
+                SM
               </div>
 
               <div>
                 <strong>
-                  Sophie Williams
+                  Sarah Miller
                 </strong>
 
                 <p>
@@ -337,15 +381,12 @@ function Home() {
             <button className="secondary-action">
               View booking
             </button>
-          </section>
+          </div>
+        </section>
 
-        </div>
-
-        {/* Find your match */}
         <section className="find-section">
-
           <div className="find-icon">
-            ♥
+            ♡
           </div>
 
           <div className="find-content">
@@ -354,38 +395,37 @@ function Home() {
             </h2>
 
             <p>
-              Tell us what you're looking for and we'll
-              help you find the perfect nanny for your family.
+              Tell us what you're looking for and we'll help
+              you find the perfect nanny for your family.
             </p>
           </div>
 
           <button className="find-button">
-            Find your match
-            <span>→</span>
+            Find your nanny
           </button>
-
         </section>
+      </main>
 
-      </div>
-
-      {/* Footer */}
       <footer className="home-footer">
-        <span>
-          © 2026 NannyMatch
-        </span>
+        <p>
+          © 2026 NannyMatch. All rights reserved.
+        </p>
 
         <div>
-          <a href="#privacy">
+          <span>
             Privacy
-          </a>
+          </span>
 
-          <a href="#help">
-            Help & support
-          </a>
+          <span>
+            Terms
+          </span>
+
+          <span>
+            Help
+          </span>
         </div>
       </footer>
-
-    </main>
+    </div>
   );
 }
 
