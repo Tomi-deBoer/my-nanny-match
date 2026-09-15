@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
 import "./Home.css";
 
@@ -89,9 +89,9 @@ function Home() {
             Find a Nanny
           </a>
 
-          <a href="#bookings" className="nav-link">
+          <Link to="/bookings" className="nav-link">
             My Bookings
-          </a>
+          </Link>
 
           <a href="#messages" className="nav-link">
             Messages

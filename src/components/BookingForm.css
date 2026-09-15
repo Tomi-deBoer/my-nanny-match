@@ -187,3 +187,24 @@
   padding: 12px 14px;
   font-size: 14px;
 }
+
+.booking-nanny-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 24px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: #f7f4ef;
+}
+
+.booking-nanny-info strong {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.booking-nanny-info span {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
