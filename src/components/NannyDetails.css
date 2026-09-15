@@ -1,0 +1,224 @@
+.nanny-details-page {
+  min-height: 100vh;
+  background: #f8f7f3;
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+.nanny-details-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.back-button {
+  border: none;
+  background: transparent;
+  color: #3f6f58;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 0;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  color: #2f5844;
+}
+
+.nanny-details-card {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.nanny-details-image-container {
+  position: relative;
+  min-height: 500px;
+  background: #e9e7df;
+}
+
+.nanny-details-image {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  object-fit: cover;
+  display: block;
+}
+
+.verified-badge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  background: #3f6f58;
+  color: white;
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.nanny-details-info {
+  padding: 40px;
+}
+
+.nanny-details-info h1 {
+  margin: 0;
+  color: #26352d;
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.nanny-details-intro {
+  color: #737a75;
+  margin: 10px 0 28px;
+  font-size: 15px;
+}
+
+.nanny-details-stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.detail-stat {
+  flex: 1;
+  background: #f5f5f0;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.detail-stat-label {
+  display: block;
+  color: #858a86;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.detail-stat strong {
+  color: #34483c;
+  font-size: 17px;
+}
+
+.nanny-details-section {
+  margin-bottom: 26px;
+}
+
+.nanny-details-section h2 {
+  margin: 0 0 12px;
+  color: #34483c;
+  font-size: 17px;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-tag {
+  background: #edf4ef;
+  color: #3f6f58;
+  border-radius: 20px;
+  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.availability-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.availability-item {
+  background: #f7f7f3;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #555c57;
+  font-size: 14px;
+}
+
+.no-availability {
+  color: #858a86;
+  font-size: 14px;
+}
+
+.booking-button {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background: #3f6f58;
+  color: white;
+  padding: 13px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.booking-button:hover {
+  background: #345c49;
+}
+
+.nanny-details-message {
+  text-align: center;
+  color: #737a75;
+  padding-top: 100px;
+}
+
+.nanny-details-error {
+  max-width: 400px;
+  margin: 100px auto;
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.nanny-details-error p {
+  color: #737a75;
+  margin-bottom: 20px;
+}
+
+.nanny-details-error button {
+  border: none;
+  border-radius: 10px;
+  background: #3f6f58;
+  color: white;
+  padding: 11px 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 750px) {
+  .nanny-details-page {
+    padding: 20px;
+  }
+
+  .nanny-details-card {
+    grid-template-columns: 1fr;
+  }
+
+  .nanny-details-image-container,
+  .nanny-details-image {
+    min-height: 350px;
+  }
+
+  .nanny-details-info {
+    padding: 28px;
+  }
+}
+
+@media (max-width: 500px) {
+  .nanny-details-stats {
+    flex-direction: column;
+  }
+
+  .nanny-details-info h1 {
+    font-size: 26px;
+  }
+}
