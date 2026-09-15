@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
 import "./Login.css";
 import api from "../services/api";
 
@@ -27,11 +27,12 @@ function Login() {
       const response = await api.post("/auth/login", {
         email,
         password
-    });
+      });
 
       console.log("Login successful:", response.data);
+
       localStorage.setItem("token", response.data.token);
-      
+
       navigate("/home");
     } catch (error) {
       console.error("Login failed:", error);

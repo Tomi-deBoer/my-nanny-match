@@ -1,71 +1,41 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 import api from "../services/api";
 import "./Home.css";
 
 function Home() {
-  const navigate = useNavigate();
-
   const [nannies, setNannies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(6);
+  const [pagination, setPagination] = useState(null);
 
-  const [pagination, setPagination] = useState({
-    page: 1,
-    limit: 6,
-    total: 0,
-    totalPages: 1
-  });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchNannies = async () => {
-      setLoading(true);
-      setError("");
-
       try {
+        setLoading(true);
+        setError("");
+
         const response = await api.get(
-          `/nannies?page=${page}&limit=${pageSize}`
+          `/nannies?page=${page}&limit=12`
         );
 
         setNannies(response.data.data);
         setPagination(response.data.pagination);
       } catch (error) {
-        console.error("Error loading nannies:", error);
-
-        if (error.response?.status === 401) {
-          localStorage.removeItem("token");
-          navigate("/");
-          return;
-        }
-
-        setError("Unable to load nannies. Please try again.");
+        console.error("Failed to load nannies:", error);
+        setError("We couldn't load the nannies right now.");
       } finally {
         setLoading(false);
       }
     };
 
     fetchNannies();
-  }, [page, pageSize, navigate]);
-
-  const handlePageSizeChange = (event) => {
-    setPageSize(Number(event.target.value));
-    setPage(1);
-  };
-
-  const handlePrevious = () => {
-    if (page > 1) {
-      setPage(page - 1);
-    }
-  };
-
-  const handleNext = () => {
-    if (page < pagination.totalPages) {
-      setPage(page + 1);
-    }
-  };
+  }, [page]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -74,328 +44,215 @@ function Home() {
 
   return (
     <div className="home-page">
-      <header className="home-nav">
-        <div className="home-logo">
-          <div className="home-logo-icon">♡</div>
-          <span>NannyMatch</span>
+      <aside className="home-sidebar">
+        <div className="sidebar-intro">
+          <div className="sidebar-badge">♡</div>
+
+          <p className="sidebar-eyebrow">NANNYMATCH</p>
+
+          <h2>
+            Find someone
+            <br />
+            <span>wonderful.</span>
+          </h2>
+
+          <p className="sidebar-description">
+            Caring people. Happy families. Connections that feel right.
+          </p>
         </div>
 
-        <nav className="nav-links">
-          <a href="#home" className="nav-link active">
-            Home
-          </a>
-
-          <a href="#nannies" className="nav-link">
-            Find a Nanny
-          </a>
-
-          <Link to="/bookings" className="nav-link">
-            My Bookings
-          </Link>
-
-          <a href="#messages" className="nav-link">
-            Messages
-          </a>
-        </nav>
-
-        <div className="nav-profile">
-          <div className="profile-avatar">JD</div>
-
-          <div className="profile-info">
-            <span className="profile-name">Jane Doe</span>
-            <span className="profile-role">Parent</span>
-          </div>
+        <nav className="home-navigation">
+          <button
+            className="nav-button nav-button-active"
+            onClick={() => navigate("/home")}
+          >
+            <span className="nav-icon">⌂</span>
+            <span>Find a Nanny</span>
+          </button>
 
           <button
-            className="logout-button"
+            className="nav-button"
+            onClick={() => navigate("/bookings")}
+          >
+            <span className="nav-icon">♡</span>
+            <span>My Bookings</span>
+          </button>
+
+          <button
+            className="nav-button"
+            onClick={() => navigate("/profile")}
+          >
+            <span className="nav-icon">○</span>
+            <span>My Profile</span>
+          </button>
+
+          <button
+            className="nav-button nav-button-logout"
             onClick={handleLogout}
           >
-            Log out
+            <span className="nav-icon">↗</span>
+            <span>Log out</span>
           </button>
+        </nav>
+
+        <div className="sidebar-decoration">
+          <span className="decor-circle decor-circle-one"></span>
+          <span className="decor-circle decor-circle-two"></span>
+          <span className="decor-heart">♡</span>
         </div>
-      </header>
+      </aside>
 
-      <main className="home-content">
-        <section className="welcome-section" id="home">
-          <div className="welcome-text">
-            <span className="welcome-eyebrow">
-              Welcome back, Jane
-            </span>
+      <section className="nanny-section">
+        <div className="nanny-section-header">
+          <div>
+            <p className="section-eyebrow">YOUR COMMUNITY</p>
 
-            <h1>Find the perfect nanny for your family.</h1>
+            <h1>Meet our nannies</h1>
 
-            <p>
-              Trusted childcare, matched to your family's needs.
+            <p className="section-description">
+              Browse caring, experienced people ready to help your family.
             </p>
           </div>
 
-          <button className="primary-action">
-            Find a nanny
-          </button>
-        </section>
-
-        <section className="stats-grid">
-          <div className="stat-card">
-            <div className="stat-icon green">♡</div>
-
-            <div>
-              <span className="stat-label">Saved nannies</span>
-              <span className="stat-value">8</span>
+          {pagination && (
+            <div className="nanny-count">
+              <strong>{pagination.total}</strong>
+              <span>nannies</span>
             </div>
-          </div>
+          )}
+        </div>
 
-          <div className="stat-card">
-            <div className="stat-icon peach">✓</div>
-
-            <div>
-              <span className="stat-label">Bookings</span>
-              <span className="stat-value">3</span>
+        <div className="nanny-grid-scroll">
+          {loading && (
+            <div className="state-message">
+              <div className="loading-heart">♡</div>
+              <p>Finding wonderful people...</p>
             </div>
-          </div>
+          )}
 
-          <div className="stat-card">
-            <div className="stat-icon purple">✉</div>
-
-            <div>
-              <span className="stat-label">Messages</span>
-              <span className="stat-value">2</span>
+          {!loading && error && (
+            <div className="state-message state-error">
+              <div className="error-icon">!</div>
+              <p>{error}</p>
             </div>
-          </div>
+          )}
 
-          <div className="stat-card">
-            <div className="stat-icon yellow">★</div>
-
-            <div>
-              <span className="stat-label">Your rating</span>
-              <span className="stat-value">5.0</span>
+          {!loading && !error && nannies.length === 0 && (
+            <div className="state-message">
+              <div className="loading-heart">♡</div>
+              <p>No nannies found.</p>
             </div>
-          </div>
-        </section>
+          )}
 
-        <section className="recommended-card" id="nannies">
-          <div className="section-header">
-            <div>
-              <span className="section-eyebrow">
-                Recommended for you
-              </span>
-
-              <h2>Meet your nanny matches</h2>
-
-              <p>
-                Nannies selected based on your family's preferences.
-              </p>
-            </div>
-
-            <div className="page-size-control">
-              <label htmlFor="page-size">
-                Show
-              </label>
-
-              <select
-                id="page-size"
-                value={pageSize}
-                onChange={handlePageSizeChange}
-              >
-                <option value={3}>3</option>
-                <option value={6}>6</option>
-                <option value={9}>9</option>
-              </select>
-
-              <span>per page</span>
-            </div>
-          </div>
-
-          <div className="nanny-scroll-area">
-            {loading && (
-              <div className="loading-state">
-                <div className="loading-spinner"></div>
-                <p>Finding your nanny matches...</p>
-              </div>
-            )}
-
-            {!loading && error && (
-              <div className="error-state">
-                <p>{error}</p>
-
-                <button
-                  className="secondary-action"
-                  onClick={() => setPage(page)}
+          {!loading && !error && nannies.length > 0 && (
+            <div className="nanny-grid">
+              {nannies.map((nanny, index) => (
+                <article
+                  className={`nanny-card nanny-card-${index % 4}`}
+                  key={nanny.id}
+                  onClick={() => navigate(`/nannies/${nanny.id}`)}
                 >
-                  Try again
-                </button>
-              </div>
-            )}
+                  <div className="nanny-image-wrapper">
+                    <img
+                      src={
+                        nanny.profileImage ||
+                        "https://placehold.co/600x600/f2e4d7/7c6d61?text=Nanny"
+                      }
+                      alt={nanny.name}
+                      className="nanny-image"
+                    />
 
-            {!loading && !error && nannies.length === 0 && (
-              <div className="empty-state">
-                <p>No nannies found.</p>
-              </div>
-            )}
+                    {nanny.isVerified && (
+                      <span
+                        className="verified-badge"
+                        title="Verified profile"
+                        aria-label="Verified profile"
+                      >
+                        ✓
+                      </span>
+                    )}
 
-            {!loading && !error && nannies.length > 0 && (
-              <div className="nanny-list">
-                {nannies.map((nanny) => (
-                  <article
-                    className="nanny-card"
-                    key={nanny.id}
-                  >
-                    <div className="nanny-image-wrapper">
-                      <img
-                        src={nanny.profileImage}
-                        alt={nanny.name}
-                        className="nanny-avatar"
-                      />
+                    <span className="favorite-button">♡</span>
+                  </div>
+
+                  <div className="nanny-card-content">
+                    <div className="nanny-name-row">
+                      <h2>{nanny.name}</h2>
 
                       {nanny.isVerified && (
-                        <span className="verified-badge">
-                          ✓ Verified
+                        <span
+                          className="name-verified-badge"
+                          title="Verified profile"
+                          aria-label="Verified profile"
+                        >
+                          ✓
                         </span>
                       )}
                     </div>
 
-                    <div className="nanny-info">
-                      <div className="nanny-name-row">
-                        <h3>{nanny.name}</h3>
+                    <p className="nanny-experience">
+                      {nanny.experienceInYears}{" "}
+                      {nanny.experienceInYears === 1
+                        ? "year"
+                        : "years"}{" "}
+                      experience
+                    </p>
 
-                        <span className="nanny-rating">
-                          ★ 4.9
-                        </span>
-                      </div>
-
-                      <p className="nanny-experience">
-                        {nanny.experienceInYears} years experience
-                      </p>
-
-                      <div className="skills-list">
-                        {nanny.skills.slice(0, 3).map((skill) => (
-                          <span
-                            className="skill-tag"
-                            key={skill}
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-
-                      <div className="nanny-footer">
-                        <span className="nanny-rate">
-                          €{nanny.hourlyRate}
-                          <small>/hour</small>
-                        </span>
-
-                        <button className="nanny-button"  onClick={() => navigate(`/nannies/${nanny.id}`)}>
-                          View profile
-                        </button>
-                      </div>
+                    <div className="nanny-skills">
+                      {nanny.skills?.slice(0, 2).map((skill) => (
+                        <span key={skill}>{skill}</span>
+                      ))}
                     </div>
-                  </article>
-                ))}
-              </div>
-            )}
-          </div>
 
+                    <div className="nanny-card-footer">
+                      <div className="nanny-rate">
+                        <strong>€{nanny.hourlyRate}</strong>
+                        <span>/ hour</span>
+                      </div>
+
+                      <button
+                        className="view-profile-button"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          navigate(`/nannies/${nanny.id}`);
+                        }}
+                      >
+                        View profile
+                        <span>→</span>
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {pagination && pagination.totalPages > 1 && (
           <div className="pagination">
             <button
               className="pagination-button"
-              onClick={handlePrevious}
-              disabled={page === 1 || loading}
+              disabled={page === 1}
+              onClick={() => setPage((current) => current - 1)}
             >
-              ← Previous
+              ←
             </button>
 
-            <span className="pagination-info">
-              Page {pagination.page} of {pagination.totalPages}
+            <span>
+              Page <strong>{page}</strong> of{" "}
+              <strong>{pagination.totalPages}</strong>
             </span>
 
             <button
               className="pagination-button"
-              onClick={handleNext}
-              disabled={
-                page === pagination.totalPages || loading
-              }
+              disabled={page === pagination.totalPages}
+              onClick={() => setPage((current) => current + 1)}
             >
-              Next →
+              →
             </button>
           </div>
-        </section>
-
-        <section className="bottom-section">
-          <div className="booking-card" id="bookings">
-            <div className="booking-header">
-              <div>
-                <span className="section-eyebrow">
-                  Upcoming
-                </span>
-
-                <h2>Your next booking</h2>
-              </div>
-
-              <span className="confirmed-badge">
-                Confirmed
-              </span>
-            </div>
-
-            <div className="booking-content">
-              <div className="booking-date">
-                <span className="calendar-icon">▣</span>
-
-                <div>
-                  <strong>Saturday, September 20</strong>
-                  <span>09:00 – 15:00</span>
-                </div>
-              </div>
-
-              <div className="booking-nanny">
-                <div className="small-avatar">AM</div>
-
-                <div>
-                  <strong>Anna Martinez</strong>
-                  <span>Professional nanny</span>
-                </div>
-              </div>
-
-              <div className="booking-location">
-                <span>⌖</span>
-                <span>Wolvega</span>
-              </div>
-            </div>
-
-            <button className="secondary-action">
-              View booking
-            </button>
-          </div>
-
-          <div className="find-section" id="messages">
-            <div className="find-icon">♡</div>
-
-            <div className="find-content">
-              <h2>Looking for something specific?</h2>
-
-              <p>
-                Search through all available nannies and find
-                someone who perfectly fits your family's needs.
-              </p>
-            </div>
-
-            <button className="find-button">
-              Browse all nannies
-            </button>
-          </div>
-        </section>
-      </main>
-
-      <footer className="home-footer">
-        <div className="home-logo">
-          <div className="home-logo-icon">♡</div>
-          <span>NannyMatch</span>
-        </div>
-
-        <p>
-          Safe, trusted childcare for modern families.
-        </p>
-
-        <span>© 2026 NannyMatch</span>
-      </footer>
+        )}
+      </section>
     </div>
   );
 }

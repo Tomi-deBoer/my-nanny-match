@@ -1,0 +1,27 @@
+.app-footer {
+  flex: 0 0 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #fffaf4;
+  border-top: 1px solid #eadfd4;
+  color: #8b8178;
+  font-size: 12px;
+  z-index: 10;
+}
+
+.app-footer span:first-child {
+  color: #75665c;
+  font-weight: 600;
+}
+
+.footer-separator {
+  color: #c7b8ab;
+}
+
+@media (max-width: 500px) {
+  .app-footer {
+    font-size: 11px;
+  }
+}
