@@ -1,115 +1,114 @@
 .nanny-details-page {
   min-height: 100vh;
-  background: #f8f7f3;
-  padding: 32px;
-  box-sizing: border-box;
+  background: #f7f4ef;
+  padding: 40px 20px;
 }
 
 .nanny-details-content {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
 .back-button {
   border: none;
   background: transparent;
-  color: #3f6f58;
+  color: #5f584f;
   font-size: 15px;
   font-weight: 600;
-  padding: 0;
-  margin-bottom: 20px;
   cursor: pointer;
+  padding: 8px 0;
+  margin-bottom: 20px;
 }
 
 .back-button:hover {
-  color: #2f5844;
+  color: #2f2b27;
 }
 
 .nanny-details-card {
-  display: grid;
-  grid-template-columns: 340px 1fr;
   background: white;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  border-radius: 20px;
+  padding: 35px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 40px;
 }
 
 .nanny-details-image-container {
   position: relative;
-  min-height: 500px;
-  background: #e9e7df;
 }
 
 .nanny-details-image {
   width: 100%;
-  height: 100%;
-  min-height: 500px;
+  height: 360px;
   object-fit: cover;
+  border-radius: 18px;
   display: block;
 }
 
 .verified-badge {
   position: absolute;
-  top: 18px;
-  left: 18px;
-  background: #3f6f58;
-  color: white;
-  padding: 7px 12px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 600;
-}
+  bottom: 15px;
+  left: 15px;
 
-.nanny-details-info {
-  padding: 40px;
+  background: #ffffff;
+  color: #3f6b4f;
+
+  padding: 8px 13px;
+  border-radius: 20px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
 }
 
 .nanny-details-info h1 {
-  margin: 0;
-  color: #26352d;
-  font-size: 32px;
+  margin: 0 0 8px;
+  color: #2f2b27;
+  font-size: 36px;
   line-height: 1.2;
 }
 
 .nanny-details-intro {
-  color: #737a75;
-  margin: 10px 0 28px;
-  font-size: 15px;
+  margin: 0 0 25px;
+  color: #756e65;
+  font-size: 16px;
 }
 
 .nanny-details-stats {
   display: flex;
-  gap: 16px;
+  gap: 35px;
   margin-bottom: 30px;
 }
 
 .detail-stat {
-  flex: 1;
-  background: #f5f5f0;
-  border-radius: 12px;
-  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .detail-stat-label {
-  display: block;
-  color: #858a86;
+  color: #8c847a;
   font-size: 13px;
-  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .detail-stat strong {
-  color: #34483c;
-  font-size: 17px;
+  color: #3a342e;
+  font-size: 18px;
 }
 
 .nanny-details-section {
-  margin-bottom: 26px;
+  margin-top: 30px;
 }
 
 .nanny-details-section h2 {
-  margin: 0 0 12px;
-  color: #34483c;
-  font-size: 17px;
+  margin: 0 0 15px;
+  color: #3a342e;
+  font-size: 20px;
 }
 
 .skills-list {
@@ -119,106 +118,355 @@
 }
 
 .skill-tag {
-  background: #edf4ef;
-  color: #3f6f58;
-  border-radius: 20px;
+  background: #f1ece5;
+  color: #62594f;
   padding: 7px 12px;
+  border-radius: 20px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-.availability-list {
+
+/* ============================= */
+/* Availability                  */
+/* ============================= */
+
+.availability-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.availability-header h2 {
+  margin-bottom: 4px;
+}
+
+.availability-header p {
+  margin: 0;
+  color: #91897f;
+  font-size: 13px;
+}
+
+.availability-legend {
+  display: flex;
+  gap: 15px;
+  padding-bottom: 2px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  color: #756e65;
+  font-size: 12px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.available-dot {
+  background: #6f9b78;
+}
+
+.unavailable-dot {
+  background: #c8c1b9;
+}
+
+
+/* ============================= */
+/* Weekly Calendar                */
+/* ============================= */
+
+.availability-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+}
+
+.availability-day {
+  min-height: 180px;
+  border-radius: 12px;
+  overflow: hidden;
+
   display: flex;
   flex-direction: column;
-  gap: 8px;
+
+  border: 1px solid #e8e2db;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.availability-item {
-  background: #f7f7f3;
-  border-radius: 8px;
-  padding: 10px 12px;
-  color: #555c57;
-  font-size: 14px;
+.availability-day.available {
+  background: #f4f8f4;
+  border-color: #d7e5d9;
 }
 
-.no-availability {
-  color: #858a86;
-  font-size: 14px;
+.availability-day.unavailable {
+  background: #faf9f7;
+  border-color: #e9e5df;
 }
+
+.availability-day.available:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(70, 100, 75, 0.12);
+}
+
+
+/* Day heading */
+
+.availability-day-header {
+  padding: 12px 8px 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-bottom: 1px solid #e3ddd6;
+}
+
+.available .availability-day-header {
+  background: #e8f1e9;
+}
+
+.unavailable .availability-day-header {
+  background: #f2efeb;
+}
+
+.availability-day-short {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+
+  color: #62594f;
+}
+
+.availability-day-name {
+  margin-top: 3px;
+
+  font-size: 11px;
+  color: #958d83;
+}
+
+
+/* Day content */
+
+.availability-day-body {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 15px 8px;
+  text-align: center;
+}
+
+.availability-icon {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #6f9b78;
+  color: white;
+
+  font-size: 17px;
+  font-weight: 700;
+
+  margin-bottom: 12px;
+}
+
+.unavailable-icon {
+  background: #e1ddd7;
+  color: #a49c93;
+}
+
+
+/* Hours */
+
+.availability-hours {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: #3f5f46;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.availability-arrow {
+  color: #8aaa91;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.availability-status {
+  margin-top: 10px;
+
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+
+  color: #6f8d75;
+}
+
+.unavailable .availability-status {
+  color: #aaa29a;
+}
+
+
+/* ============================= */
+/* Booking button                 */
+/* ============================= */
 
 .booking-button {
   width: 100%;
+  margin-top: 35px;
+
   border: none;
   border-radius: 10px;
-  background: #3f6f58;
+
+  background: #4d6b52;
   color: white;
-  padding: 13px 20px;
+
+  padding: 14px 20px;
+
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
+
   cursor: pointer;
-  margin-top: 8px;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .booking-button:hover {
-  background: #345c49;
+  background: #3f5944;
+  transform: translateY(-1px);
 }
+
+
+/* ============================= */
+/* Loading / Error                */
+/* ============================= */
 
 .nanny-details-message {
   text-align: center;
-  color: #737a75;
-  padding-top: 100px;
+  color: #756e65;
+  padding: 50px;
 }
 
 .nanny-details-error {
-  max-width: 400px;
+  max-width: 500px;
   margin: 100px auto;
   background: white;
-  border-radius: 16px;
   padding: 30px;
+  border-radius: 15px;
   text-align: center;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
 .nanny-details-error p {
-  color: #737a75;
+  color: #8a4b4b;
   margin-bottom: 20px;
 }
 
 .nanny-details-error button {
   border: none;
-  border-radius: 10px;
-  background: #3f6f58;
+  border-radius: 8px;
+  background: #4d6b52;
   color: white;
-  padding: 11px 18px;
-  font-weight: 600;
+  padding: 10px 18px;
   cursor: pointer;
 }
 
-@media (max-width: 750px) {
-  .nanny-details-page {
-    padding: 20px;
+
+/* ============================= */
+/* Responsive                     */
+/* ============================= */
+
+@media (max-width: 950px) {
+  .nanny-details-card {
+    grid-template-columns: 240px 1fr;
+    gap: 25px;
+    padding: 25px;
   }
 
+  .nanny-details-image {
+    height: 300px;
+  }
+
+  .availability-calendar {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+
+@media (max-width: 700px) {
   .nanny-details-card {
     grid-template-columns: 1fr;
   }
 
-  .nanny-details-image-container,
   .nanny-details-image {
-    min-height: 350px;
-  }
-
-  .nanny-details-info {
-    padding: 28px;
-  }
-}
-
-@media (max-width: 500px) {
-  .nanny-details-stats {
-    flex-direction: column;
+    height: 350px;
   }
 
   .nanny-details-info h1 {
-    font-size: 26px;
+    font-size: 30px;
+  }
+
+  .availability-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .availability-calendar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+@media (max-width: 450px) {
+  .nanny-details-page {
+    padding: 25px 12px;
+  }
+
+  .nanny-details-card {
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  .nanny-details-image {
+    height: 300px;
+  }
+
+  .nanny-details-stats {
+    gap: 20px;
+  }
+
+  .availability-calendar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .availability-day {
+    min-height: 165px;
   }
 }

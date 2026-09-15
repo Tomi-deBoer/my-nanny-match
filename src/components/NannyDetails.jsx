@@ -11,6 +11,16 @@ function NannyDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const days = [
+    { name: "Monday", short: "MON" },
+    { name: "Tuesday", short: "TUE" },
+    { name: "Wednesday", short: "WED" },
+    { name: "Thursday", short: "THU" },
+    { name: "Friday", short: "FRI" },
+    { name: "Saturday", short: "SAT" },
+    { name: "Sunday", short: "SUN" }
+  ];
+
   useEffect(() => {
     const fetchNanny = async () => {
       try {
@@ -34,7 +44,9 @@ function NannyDetails() {
   if (loading) {
     return (
       <div className="nanny-details-page">
-        <p className="nanny-details-message">Loading profile...</p>
+        <p className="nanny-details-message">
+          Loading profile...
+        </p>
       </div>
     );
   }
@@ -60,6 +72,7 @@ function NannyDetails() {
   return (
     <div className="nanny-details-page">
       <main className="nanny-details-content">
+
         <button
           className="back-button"
           onClick={() => navigate("/home")}
@@ -68,6 +81,7 @@ function NannyDetails() {
         </button>
 
         <section className="nanny-details-card">
+
           <div className="nanny-details-image-container">
             <img
               src={nanny.profileImage}
@@ -83,6 +97,7 @@ function NannyDetails() {
           </div>
 
           <div className="nanny-details-info">
+
             <h1>{nanny.name}</h1>
 
             <p className="nanny-details-intro">
@@ -90,6 +105,7 @@ function NannyDetails() {
             </p>
 
             <div className="nanny-details-stats">
+
               <div className="detail-stat">
                 <span className="detail-stat-label">
                   Experience
@@ -109,6 +125,7 @@ function NannyDetails() {
                   €{nanny.hourlyRate}/hour
                 </strong>
               </div>
+
             </div>
 
             <div className="nanny-details-section">
@@ -127,36 +144,118 @@ function NannyDetails() {
             </div>
 
             <div className="nanny-details-section">
-              <h2>Availability</h2>
 
-              {nanny.availability?.length > 0 ? (
-                <div className="availability-list">
-                  {nanny.availability.map((item, index) => (
-                    <div
-                      className="availability-item"
-                      key={index}
-                    >
-                      {typeof item === "object"
-                        ? JSON.stringify(item)
-                        : item}
-                    </div>
-                  ))}
+              <div className="availability-header">
+                <div>
+                  <h2>Availability</h2>
+
+                  <p>
+                    Weekly availability
+                  </p>
                 </div>
-              ) : (
-                <p className="no-availability">
-                  No availability information provided.
-                </p>
-              )}
+
+                <div className="availability-legend">
+                  <span className="legend-item">
+                    <span className="legend-dot available-dot"></span>
+                    Available
+                  </span>
+
+                  <span className="legend-item">
+                    <span className="legend-dot unavailable-dot"></span>
+                    Unavailable
+                  </span>
+                </div>
+              </div>
+
+              <div className="availability-calendar">
+
+                {days.map((day) => {
+                  const availability =
+                    nanny.availability?.find(
+                      (item) => item.day === day.name
+                    );
+
+                  return (
+                    <div
+                      className={`availability-day ${
+                        availability
+                          ? "available"
+                          : "unavailable"
+                      }`}
+                      key={day.name}
+                    >
+
+                      <div className="availability-day-header">
+                        <span className="availability-day-short">
+                          {day.short}
+                        </span>
+
+                        <span className="availability-day-name">
+                          {day.name}
+                        </span>
+                      </div>
+
+                      <div className="availability-day-body">
+
+                        {availability ? (
+                          <>
+                            <div className="availability-icon">
+                              ✓
+                            </div>
+
+                            <div className="availability-hours">
+                              <span>
+                                {availability.from}
+                              </span>
+
+                              <span className="availability-arrow">
+                                ↓
+                              </span>
+
+                              <span>
+                                {availability.to}
+                              </span>
+                            </div>
+
+                            <span className="availability-status">
+                              Available
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            <div className="availability-icon unavailable-icon">
+                              —
+                            </div>
+
+                            <span className="availability-status">
+                              Not available
+                            </span>
+                          </>
+                        )}
+
+                      </div>
+
+                    </div>
+                  );
+                })}
+
+              </div>
+
             </div>
 
             <button
               className="booking-button"
-              onClick={() => navigate(`/bookings/new/${nanny.id}`)}
+              onClick={() =>
+                navigate(`/bookings/new/${nanny.id}`)
+              }
             >
               Book this nanny
             </button>
+
           </div>
+
         </section>
+
       </main>
     </div>
   );
