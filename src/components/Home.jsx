@@ -37,11 +37,6 @@ function Home() {
     fetchNannies();
   }, [page]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
-  };
-
   return (
     <div className="home-page">
       <aside className="home-sidebar">
@@ -84,14 +79,6 @@ function Home() {
           >
             <span className="nav-icon">○</span>
             <span>My Profile</span>
-          </button>
-
-          <button
-            className="nav-button nav-button-logout"
-            onClick={handleLogout}
-          >
-            <span className="nav-icon">↗</span>
-            <span>Log out</span>
           </button>
         </nav>
 

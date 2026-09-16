@@ -13,9 +13,14 @@
   z-index: 10;
 }
 
+/* =================================
+   BRAND
+   ================================= */
+
 .header-brand {
   display: flex;
   align-items: center;
+
   gap: 10px;
 }
 
@@ -43,17 +48,26 @@
   color: #4f4a45;
 
   font-family: Georgia, "Times New Roman", serif;
+
   font-size: 19px;
   font-weight: 600;
 }
 
-.header-brand p {
-  display: none;
+/* =================================
+   RIGHT SIDE
+   ================================= */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
 }
 
 .header-status {
   display: flex;
   align-items: center;
+
   gap: 7px;
 
   color: #8a7d73;
@@ -70,12 +84,54 @@
   background: #91b89c;
 }
 
+/* =================================
+   LOGOUT BUTTON
+   ================================= */
+
+.header-logout-button {
+  padding: 6px 11px;
+
+  border: 1px solid #dfd0c5;
+  border-radius: 7px;
+
+  background: transparent;
+  color: #75665d;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.header-logout-button:hover {
+  background: #f3e4d8;
+  border-color: #d5c1b4;
+  color: #594d46;
+}
+
+/* =================================
+   MOBILE
+   ================================= */
+
 @media (max-width: 600px) {
   .app-header {
     padding: 0 14px;
   }
 
+  .header-actions {
+    gap: 9px;
+  }
+
   .header-status span:last-child {
     display: none;
+  }
+
+  .header-logout-button {
+    padding: 6px 9px;
   }
 }
