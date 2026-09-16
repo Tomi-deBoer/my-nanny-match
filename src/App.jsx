@@ -9,6 +9,7 @@ import NannyDetails from "./components/NannyDetails";
 import BookingForm from "./components/BookingForm";
 import Bookings from "./components/Bookings";
 import About from "./components/About";
+import Register from "./components/Register";
 
 import ErrorPage from "./components/ErrorPage";
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/bookings/new/:nannyId" element={<BookingForm />} />
           <Route path="/profile" element={<div>Profile coming soon</div>} />
+          <Route path="/register" element={<Register />} />
 
           <Route path="/about" element={<About />} />
 

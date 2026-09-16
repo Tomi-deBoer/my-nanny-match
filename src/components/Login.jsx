@@ -156,7 +156,12 @@ function Login() {
 
           <p className="signup-text">
             Don't have an account?{" "}
-            <a href="/register">Create one</a>
+            <button
+              type="button"
+              onClick={() => navigate("/register")}
+            >
+              Create one
+            </button>
           </p>
         </div>
       </section>
