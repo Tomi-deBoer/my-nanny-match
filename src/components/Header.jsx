@@ -5,8 +5,15 @@ import "./Header.css";
 function Header() {
   const navigate = useNavigate();
 
+  const user = JSON.parse(
+    localStorage.getItem("user") || "null"
+  );
+
+  const isAdmin = user?.role === "admin";
+
   function handleLogout() {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
 
     navigate("/");
   }
@@ -20,6 +27,17 @@ function Header() {
       </div>
 
       <div className="header-actions">
+
+        {isAdmin && (
+          <button
+            type="button"
+            className="header-admin-button"
+            onClick={() => navigate("/admin/users")}
+          >
+            Manage Users
+          </button>
+        )}
+
         <div className="header-status">
           <span className="header-status-dot"></span>
           <span>Safe & caring connections</span>
@@ -32,6 +50,7 @@ function Header() {
         >
           Log out
         </button>
+
       </div>
     </header>
   );
