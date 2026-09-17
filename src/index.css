@@ -11,8 +11,7 @@
 
   --color-border: #dfe5e0;
 
-  --shadow-card:
-    0 12px 35px rgba(50, 70, 58, 0.1);
+  --shadow-card: 0 12px 35px rgba(50, 70, 58, 0.1);
 }
 
 html,
@@ -20,11 +19,8 @@ body,
 #root {
   width: 100%;
   height: 100%;
-
   margin: 0;
   padding: 0;
-
-  overflow: hidden;
 }
 
 * {
@@ -33,7 +29,6 @@ body,
 
 body {
   font-family: Arial, sans-serif;
-
   background: var(--color-background);
   color: var(--color-text);
 }
@@ -50,8 +45,9 @@ a {
   text-decoration: none;
 }
 
+
 /* =================================
-   GLOBAL APP SHELL
+   APPLICATION SHELL
    ================================= */
 
 .app {
@@ -62,14 +58,27 @@ a {
   display: flex;
   flex-direction: column;
 
-  overflow: hidden;
+  background: var(--color-background);
 }
+
+
+/* Header and footer keep their
+   natural size. */
+
+.app > header,
+.app > footer {
+  flex: 0 0 auto;
+}
+
+
+/* The middle section gets the
+   remaining viewport space. */
 
 .app-content {
   flex: 1 1 auto;
-
   min-height: 0;
-  height: 0;
+  min-width: 0;
 
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

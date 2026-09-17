@@ -56,22 +56,16 @@ function Profile() {
         email: user.email || "",
         phoneNr: user.phoneNr || "",
         profileImage: nannyProfile?.profileImage || "",
-        experienceInYears:
-          nannyProfile?.experienceInYears ?? "",
-        hourlyRate:
-          nannyProfile?.hourlyRate ?? "",
-        skills:
-          nannyProfile?.skills?.join(", ") || "",
-        availability:
-          nannyProfile?.availability || []
+        experienceInYears: nannyProfile?.experienceInYears ?? "",
+        hourlyRate: nannyProfile?.hourlyRate ?? "",
+        skills: nannyProfile?.skills?.join(", ") || "",
+        availability: nannyProfile?.availability || []
       });
     } catch (error) {
       console.error("Failed to load profile:", error);
 
       if (error.response?.status === 401) {
-        setError(
-          "Your session has expired. Please log in again."
-        );
+        setError("Your session has expired. Please log in again.");
       } else {
         setError("Unable to load your profile.");
       }
@@ -188,8 +182,7 @@ function Profile() {
           .map((skill) => skill.trim())
           .filter(Boolean);
 
-        payload.availability =
-          formData.availability;
+        payload.availability = formData.availability;
       }
 
       const response = await api.put(
@@ -199,8 +192,7 @@ function Profile() {
 
       setProfile({
         user: response.data.user,
-        nannyProfile:
-          response.data.nannyProfile || null
+        nannyProfile: response.data.nannyProfile || null
       });
 
       setSuccess(
@@ -209,19 +201,14 @@ function Profile() {
 
       setIsEditing(false);
     } catch (error) {
-      console.error(
-        "Failed to update profile:",
-        error
-      );
+      console.error("Failed to update profile:", error);
 
       if (error.response?.data?.message) {
         setError(error.response.data.message);
       } else if (error.response?.data?.error) {
         setError(error.response.data.error);
       } else {
-        setError(
-          "Unable to update your profile."
-        );
+        setError("Unable to update your profile.");
       }
     } finally {
       setIsSaving(false);
@@ -239,16 +226,12 @@ function Profile() {
       name: user.name || "",
       email: user.email || "",
       phoneNr: user.phoneNr || "",
-      profileImage:
-        nannyProfile?.profileImage || "",
+      profileImage: nannyProfile?.profileImage || "",
       experienceInYears:
         nannyProfile?.experienceInYears ?? "",
-      hourlyRate:
-        nannyProfile?.hourlyRate ?? "",
-      skills:
-        nannyProfile?.skills?.join(", ") || "",
-      availability:
-        nannyProfile?.availability || []
+      hourlyRate: nannyProfile?.hourlyRate ?? "",
+      skills: nannyProfile?.skills?.join(", ") || "",
+      availability: nannyProfile?.availability || []
     });
 
     setError("");
@@ -340,8 +323,9 @@ function Profile() {
           onSubmit={handleSubmit}
         >
 
-          <section className="profile-card">
+          {/* PERSONAL INFORMATION */}
 
+          <section className="profile-card">
             <div className="card-heading">
               <div className="card-icon">♥</div>
 
@@ -414,7 +398,9 @@ function Profile() {
               </div>
 
               <div className="profile-field">
-                <label>Account type</label>
+                <label>
+                  Account type
+                </label>
 
                 <div className="role-badge">
                   {isNanny ? "Nanny" : "Parent"}
@@ -423,6 +409,9 @@ function Profile() {
 
             </div>
           </section>
+
+
+          {/* NANNY INFORMATION */}
 
           {isNanny && nannyProfile && (
             <>
@@ -565,6 +554,9 @@ function Profile() {
                 </div>
               </section>
 
+
+              {/* WEEKLY AVAILABILITY */}
+
               <section className="profile-card">
 
                 <div className="card-heading">
@@ -590,71 +582,98 @@ function Profile() {
 
                       return (
                         <div
-                          className={`availability-row ${
+                          className={`availability-card ${
                             available ? "available" : ""
                           }`}
                           key={day}
                         >
 
-                          <label className="day-toggle">
-                            <input
-                              type="checkbox"
-                              checked={available}
-                              onChange={() =>
+                          <div className="availability-card-header">
+
+                            <div>
+                              <div className="availability-day-name">
+                                {day}
+                              </div>
+
+                              <div className="availability-status">
+                                {available
+                                  ? "Available"
+                                  : "Not available"}
+                              </div>
+                            </div>
+
+                            <button
+                              type="button"
+                              className={`availability-toggle ${
+                                available ? "active" : ""
+                              }`}
+                              onClick={() =>
                                 toggleDay(day)
                               }
-                            />
-
-                            <span className="custom-checkbox">
-                              {available && "✓"}
-                            </span>
-
-                            <span className="day-name">
-                              {day}
-                            </span>
-                          </label>
-
-                          <div
-                            className={`time-inputs ${
-                              available
-                                ? "time-inputs-active"
-                                : "time-inputs-disabled"
-                            }`}
-                          >
-
-                            <input
-                              type="time"
-                              value={
-                                availability.startTime
-                              }
-                              disabled={!available}
-                              onChange={(event) =>
-                                handleAvailabilityChange(
-                                  day,
-                                  "startTime",
-                                  event.target.value
-                                )
-                              }
-                            />
-
-                            <span>to</span>
-
-                            <input
-                              type="time"
-                              value={
-                                availability.endTime
-                              }
-                              disabled={!available}
-                              onChange={(event) =>
-                                handleAvailabilityChange(
-                                  day,
-                                  "endTime",
-                                  event.target.value
-                                )
-                              }
-                            />
+                              aria-pressed={available}
+                            >
+                              {available
+                                ? "Available"
+                                : "Off"}
+                            </button>
 
                           </div>
+
+                          {available && (
+                            <div className="availability-times">
+
+                              <div className="time-field">
+                                <label
+                                  htmlFor={`${day}-start`}
+                                >
+                                  From
+                                </label>
+
+                                <input
+                                  id={`${day}-start`}
+                                  type="time"
+                                  value={
+                                    availability.startTime
+                                  }
+                                  onChange={(event) =>
+                                    handleAvailabilityChange(
+                                      day,
+                                      "startTime",
+                                      event.target.value
+                                    )
+                                  }
+                                />
+                              </div>
+
+                              <div className="time-separator">
+                                to
+                              </div>
+
+                              <div className="time-field">
+                                <label
+                                  htmlFor={`${day}-end`}
+                                >
+                                  Until
+                                </label>
+
+                                <input
+                                  id={`${day}-end`}
+                                  type="time"
+                                  value={
+                                    availability.endTime
+                                  }
+                                  onChange={(event) =>
+                                    handleAvailabilityChange(
+                                      day,
+                                      "endTime",
+                                      event.target.value
+                                    )
+                                  }
+                                />
+                              </div>
+
+                            </div>
+                          )}
 
                         </div>
                       );
@@ -702,6 +721,9 @@ function Profile() {
 
               </section>
 
+
+              {/* VERIFICATION */}
+
               <section className="verification-card">
 
                 <div className="verification-icon">
@@ -727,6 +749,9 @@ function Profile() {
               </section>
             </>
           )}
+
+
+          {/* ACTIONS */}
 
           {isEditing && (
             <div className="profile-actions">
