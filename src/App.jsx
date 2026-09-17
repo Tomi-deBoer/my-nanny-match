@@ -11,6 +11,7 @@ import Bookings from "./components/Bookings";
 import About from "./components/About";
 import Register from "./components/Register";
 import AdminUsers from "./components/AdminUsers";
+import Contact from "./components/Contact";
 
 import ErrorPage from "./components/ErrorPage";
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/admin/users" element={<AdminUsers />}/>
 
           <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
 
           <Route path="*" element={<ErrorPage />} />
         </Routes>

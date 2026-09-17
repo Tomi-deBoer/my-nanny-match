@@ -80,6 +80,15 @@ function Home() {
             <span className="nav-icon">○</span>
             <span>My Profile</span>
           </button>
+
+          <button
+            className="nav-button"
+            onClick={() => navigate("/contact")}
+          >
+            <span className="nav-icon">✉</span>
+            <span>Contact Us</span>
+          </button>
+
         </nav>
 
         <div className="sidebar-decoration">
