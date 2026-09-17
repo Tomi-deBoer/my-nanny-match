@@ -12,6 +12,7 @@ import About from "./components/About";
 import Register from "./components/Register";
 import AdminUsers from "./components/AdminUsers";
 import Contact from "./components/Contact";
+import Profile from "./components/Profile";
 
 import ErrorPage from "./components/ErrorPage";
 
@@ -27,7 +28,7 @@ function App() {
           <Route path="/nannies/:nannyId" element={<NannyDetails />} />
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/bookings/new/:nannyId" element={<BookingForm />} />
-          <Route path="/profile" element={<div>Profile coming soon</div>} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/register" element={<Register />} />
           <Route path="/admin/users" element={<AdminUsers />}/>
 
