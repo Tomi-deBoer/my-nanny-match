@@ -1,36 +1,62 @@
 .booking-page {
   min-height: 100vh;
-  background: #f8f7f3;
+
+  background: #f7f8f6;
+
   padding: 32px;
+
   box-sizing: border-box;
 }
 
 .booking-content {
   max-width: 700px;
+
   margin: 0 auto;
 }
 
+/* =================================
+   BACK BUTTON
+   ================================= */
+
 .booking-back-button {
   border: none;
+
   background: transparent;
-  color: #3f6f58;
+  color: #5b8068;
+
   font-size: 15px;
   font-weight: 600;
+
   padding: 0;
+
   margin-bottom: 20px;
+
   cursor: pointer;
 }
 
 .booking-back-button:hover {
-  color: #2f5844;
+  color: #486b55;
 }
 
+/* =================================
+   BOOKING CARD
+   ================================= */
+
 .booking-card {
-  background: white;
+  background: #ffffff;
+
+  border: 1px solid #dfe5e0;
   border-radius: 18px;
+
   padding: 40px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+
+  box-shadow:
+    0 8px 30px rgba(50, 70, 58, 0.06);
 }
+
+/* =================================
+   HEADER
+   ================================= */
 
 .booking-header {
   margin-bottom: 32px;
@@ -38,119 +64,242 @@
 
 .booking-eyebrow {
   display: block;
-  color: #3f6f58;
+
+  color: #5b8068;
+
   font-size: 13px;
   font-weight: 700;
+
   text-transform: uppercase;
   letter-spacing: 0.08em;
+
   margin-bottom: 8px;
 }
 
 .booking-header h1 {
   margin: 0;
-  color: #26352d;
+
+  color: #354139;
+
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 32px;
   line-height: 1.2;
+
+  font-weight: 500;
 }
 
 .booking-header p {
   margin: 10px 0 0;
-  color: #737a75;
+
+  color: #758078;
+
   font-size: 15px;
 }
+
+/* =================================
+   FORM
+   ================================= */
 
 .booking-form {
   display: flex;
   flex-direction: column;
+
   gap: 22px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
+
   gap: 8px;
 }
 
 .form-group label {
-  color: #34483c;
+  color: #65746a;
+
   font-size: 14px;
   font-weight: 600;
 }
 
 .optional {
-  color: #929792;
+  color: #89958d;
+
   font-size: 12px;
   font-weight: 400;
+
   margin-left: 8px;
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
+
   box-sizing: border-box;
-  border: 1px solid #dfe2de;
+
+  border: 1px solid #d4ded7;
   border-radius: 10px;
-  background: #fbfbf9;
-  color: #26352d;
+
+  background: #fbfcfb;
+  color: #354139;
+
   font-family: inherit;
   font-size: 15px;
+
   padding: 12px 14px;
+
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: #3f6f58;
-  box-shadow: 0 0 0 3px rgba(63, 111, 88, 0.1);
+  border-color: #5b8068;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0 3px rgba(91, 128, 104, 0.12);
 }
 
 .form-group textarea {
   resize: vertical;
+
   min-height: 120px;
 }
 
+/* =================================
+   TIME FIELDS
+   ================================= */
+
 .time-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap: 16px;
 }
+
+/* =================================
+   ACTIONS
+   ================================= */
 
 .booking-actions {
   display: flex;
   justify-content: flex-end;
+
   gap: 12px;
+
   margin-top: 8px;
 }
 
 .booking-cancel-button,
 .booking-submit-button {
   border-radius: 10px;
+
   padding: 12px 22px;
+
   font-size: 14px;
   font-weight: 600;
+
   cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .booking-cancel-button {
-  border: 1px solid #dfe2de;
-  background: white;
-  color: #536058;
+  border: 1px solid #d4ded7;
+
+  background: #ffffff;
+  color: #65746a;
 }
 
 .booking-cancel-button:hover {
-  background: #f5f5f1;
+  background: #f4f6f4;
+
+  border-color: #c5d1c8;
 }
 
 .booking-submit-button {
   border: none;
-  background: #3f6f58;
-  color: white;
+
+  background: #5b8068;
+  color: #ffffff;
+
+  box-shadow:
+    0 4px 10px rgba(70, 105, 82, 0.14);
 }
 
 .booking-submit-button:hover {
-  background: #345c49;
+  background: #486b55;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 14px rgba(70, 105, 82, 0.18);
 }
+
+/* =================================
+   ERROR
+   ================================= */
+
+.booking-error {
+  background: #fff5f5;
+
+  border: 1px solid #f0cccc;
+  border-radius: 10px;
+
+  color: #b84d4d;
+
+  padding: 12px 14px;
+
+  font-size: 14px;
+}
+
+/* =================================
+   NANNY INFO
+   ================================= */
+
+.booking-nanny-info {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  margin-bottom: 24px;
+
+  padding: 14px 16px;
+
+  border: 1px solid #dfe5e0;
+  border-radius: 10px;
+
+  background: #edf3ee;
+}
+
+.booking-nanny-info strong {
+  font-size: 0.85rem;
+
+  color: #65746a;
+}
+
+.booking-nanny-info span {
+  font-size: 1rem;
+  font-weight: 600;
+
+  color: #354139;
+}
+
+/* =================================
+   MOBILE
+   ================================= */
 
 @media (max-width: 600px) {
   .booking-page {
@@ -177,34 +326,4 @@
   .booking-submit-button {
     width: 100%;
   }
-}
-
-.booking-error {
-  background: #fff1f0;
-  border: 1px solid #f0c7c3;
-  border-radius: 10px;
-  color: #a94442;
-  padding: 12px 14px;
-  font-size: 14px;
-}
-
-.booking-nanny-info {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-bottom: 24px;
-  padding: 14px 16px;
-  border-radius: 10px;
-  background: #f7f4ef;
-}
-
-.booking-nanny-info strong {
-  font-size: 0.85rem;
-  color: #777;
-}
-
-.booking-nanny-info span {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #333;
 }

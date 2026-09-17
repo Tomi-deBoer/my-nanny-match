@@ -1,23 +1,29 @@
 .app-footer {
   flex: 0 0 42px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   gap: 8px;
-  background: #fffaf4;
-  border-top: 1px solid #eadfd4;
-  color: #8b8178;
+
+  background: #ffffff;
+  border-top: 1px solid #dfe5e0;
+
+  color: #89958d;
+
   font-size: 12px;
+
   z-index: 10;
 }
 
 .app-footer span:first-child {
-  color: #75665c;
+  color: #5b8068;
   font-weight: 600;
 }
 
 .footer-separator {
-  color: #c7b8ab;
+  color: #b8cabe;
 }
 
 @media (max-width: 500px) {

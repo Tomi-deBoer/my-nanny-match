@@ -5,7 +5,7 @@
 
   padding: 42px 32px;
 
-  background: #f8f2ec;
+  background: #f7f8f6;
 
   overflow-y: auto;
 }
@@ -32,7 +32,7 @@
 .contact-eyebrow {
   margin: 0 0 8px;
 
-  color: #a18d80;
+  color: #7d9885;
 
   font-size: 10px;
   font-weight: 700;
@@ -42,10 +42,9 @@
 .contact-header h1 {
   margin: 0;
 
-  color: #594d46;
+  color: #354139;
 
   font-family: Georgia, "Times New Roman", serif;
-
   font-size: 32px;
   font-weight: 500;
 }
@@ -55,7 +54,7 @@
 
   margin: 10px auto 0;
 
-  color: #93847a;
+  color: #758078;
 
   font-size: 12px;
   line-height: 1.7;
@@ -68,7 +67,8 @@
 .contact-grid {
   display: grid;
 
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns:
+    repeat(2, 1fr);
 
   gap: 16px;
 }
@@ -85,13 +85,13 @@
 
   padding: 22px;
 
-  border: 1px solid #eadfd6;
+  border: 1px solid #dfe5e0;
   border-radius: 15px;
 
-  background: #fffaf5;
+  background: #ffffff;
 
   box-shadow:
-    0 8px 24px rgba(100, 80, 65, 0.06);
+    0 8px 24px rgba(50, 70, 58, 0.06);
 }
 
 .contact-card-icon {
@@ -106,22 +106,21 @@
 
   border-radius: 12px;
 
-  background: #f3c5c4;
-  color: #865d5e;
+  background: #edf3ee;
+  color: #5b8068;
 
   font-size: 19px;
 
   box-shadow:
-    0 3px 9px rgba(123, 79, 80, 0.08);
+    0 3px 9px rgba(70, 105, 82, 0.08);
 }
 
 .contact-card h2 {
   margin: 1px 0 6px;
 
-  color: #594d46;
+  color: #354139;
 
   font-family: Georgia, "Times New Roman", serif;
-
   font-size: 19px;
   font-weight: 500;
 }
@@ -129,7 +128,7 @@
 .contact-card p {
   margin: 0 0 10px;
 
-  color: #93847a;
+  color: #758078;
 
   font-size: 11px;
   line-height: 1.6;
@@ -142,7 +141,7 @@
 .contact-link {
   display: inline-block;
 
-  color: #a96f65;
+  color: #5b8068;
 
   font-size: 12px;
   font-weight: 700;
@@ -151,7 +150,7 @@
 }
 
 .contact-link:hover {
-  color: #865d5e;
+  color: #486b55;
 
   text-decoration: underline;
 }
@@ -161,7 +160,7 @@
 
   margin-top: 6px;
 
-  color: #a18d80;
+  color: #89958d;
 
   font-size: 10px;
 }
@@ -177,7 +176,8 @@
 .social-links {
   display: grid;
 
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns:
+    repeat(3, 1fr);
 
   gap: 8px;
 
@@ -190,10 +190,10 @@
 
   padding: 10px 11px;
 
-  border: 1px solid #eadfd6;
+  border: 1px solid #dfe5e0;
   border-radius: 8px;
 
-  background: #fffdfb;
+  background: #fbfcfb;
 
   text-decoration: none;
 
@@ -203,12 +203,13 @@
 }
 
 .social-links a:hover {
-  background: #f7eee7;
-  border-color: #d9c8bb;
+  background: #edf3ee;
+
+  border-color: #b8cabe;
 }
 
 .social-name {
-  color: #75665d;
+  color: #65746a;
 
   font-size: 10px;
   font-weight: 700;
@@ -217,7 +218,7 @@
 .social-handle {
   margin-top: 3px;
 
-  color: #a18d80;
+  color: #89958d;
 
   font-size: 10px;
 }
@@ -233,20 +234,29 @@
 
   padding: 9px 15px;
 
-  border: 1px solid #dfd0c5;
+  border: 1px solid #cfdad2;
   border-radius: 8px;
 
-  background: #fffaf5;
-  color: #75665d;
+  background: #ffffff;
+  color: #65746a;
 
   font-size: 11px;
   font-weight: 700;
 
   cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .contact-back-button:hover {
-  background: #f3e4d8;
+  background: #edf3ee;
+
+  border-color: #b8cabe;
+
+  color: #486b55;
 }
 
 /* =================================

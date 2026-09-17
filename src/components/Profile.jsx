@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Profile.css";
 import api from "../services/api";
 
@@ -13,6 +14,8 @@ const DAYS = [
 ];
 
 function Profile() {
+  const navigate = useNavigate();
+
   const [profile, setProfile] = useState(null);
 
   const [formData, setFormData] = useState({
@@ -269,6 +272,16 @@ function Profile() {
   return (
     <div className="profile-page">
       <div className="profile-container">
+
+        <div className="profile-back-row">
+          <button
+            type="button"
+            className="profile-back-button"
+            onClick={() => navigate("/home")}
+          >
+            ← Back to home
+          </button>
+        </div>
 
         <section className="profile-heading">
           <div>

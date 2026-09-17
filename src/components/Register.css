@@ -9,7 +9,7 @@
 
   padding: 30px 20px;
 
-  background: #f8f2ec;
+  background: #f7f8f6;
 
   overflow-y: auto;
 }
@@ -19,12 +19,13 @@
 
   padding: 34px 36px;
 
-  background: #fffaf5;
+  background: #ffffff;
 
-  border: 1px solid #eadfd5;
+  border: 1px solid #dfe5e0;
   border-radius: 18px;
 
-  box-shadow: 0 18px 50px rgba(80, 65, 55, 0.08);
+  box-shadow:
+    0 12px 35px rgba(50, 70, 58, 0.08);
 }
 
 .register-icon {
@@ -39,10 +40,13 @@
 
   border-radius: 15px;
 
-  background: #f3c5c4;
-  color: #865d5e;
+  background: #edf3ee;
+  color: #5b8068;
 
   font-size: 27px;
+
+  box-shadow:
+    0 4px 10px rgba(70, 105, 82, 0.08);
 }
 
 .register-eyebrow {
@@ -50,7 +54,7 @@
 
   text-align: center;
 
-  color: #b47b72;
+  color: #7d9885;
 
   font-size: 9px;
   font-weight: 700;
@@ -62,22 +66,21 @@
 
   text-align: center;
 
-  color: #4f4a45;
+  color: #354139;
 
   font-family: Georgia, "Times New Roman", serif;
-
   font-size: 30px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .register-intro {
-  margin: 9px auto 24px;
-
   max-width: 330px;
+
+  margin: 9px auto 24px;
 
   text-align: center;
 
-  color: #7c7169;
+  color: #758078;
 
   font-size: 12px;
   line-height: 1.6;
@@ -92,11 +95,11 @@
 
   padding: 10px 12px;
 
-  border: 1px solid #e5b9b5;
-  border-radius: 7px;
+  border: 1px solid #f0cccc;
+  border-radius: 8px;
 
-  background: #f9e7e5;
-  color: #8c5550;
+  background: #fff5f5;
+  color: #b84d4d;
 
   font-size: 11px;
   line-height: 1.5;
@@ -119,7 +122,7 @@
 
   gap: 6px;
 
-  color: #625850;
+  color: #65746a;
 
   font-size: 11px;
   font-weight: 600;
@@ -133,11 +136,11 @@
 
   padding: 10px 11px;
 
-  border: 1px solid #dfd0c5;
+  border: 1px solid #d4ded7;
   border-radius: 7px;
 
-  background: #ffffff;
-  color: #4f4a45;
+  background: #fbfcfb;
+  color: #354139;
 
   font-size: 12px;
 
@@ -145,17 +148,21 @@
 
   transition:
     border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    background 0.2s ease;
 }
 
 .register-form input:focus {
-  border-color: #b47b72;
+  border-color: #5b8068;
 
-  box-shadow: 0 0 0 3px rgba(180, 123, 114, 0.1);
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0 3px rgba(91, 128, 104, 0.12);
 }
 
 .register-form input::placeholder {
-  color: #b4aaa2;
+  color: #a4afa8;
 }
 
 /* =================================
@@ -167,14 +174,16 @@
 
   padding: 14px;
 
-  border: 1px solid #eadfd5;
+  border: 1px solid #dfe5e0;
   border-radius: 9px;
+
+  background: #ffffff;
 }
 
 .register-role legend {
   padding: 0 5px;
 
-  color: #625850;
+  color: #65746a;
 
   font-size: 11px;
   font-weight: 600;
@@ -191,16 +200,19 @@
   border-radius: 7px;
 
   cursor: pointer;
+
+  transition:
+    background 0.2s ease;
 }
 
 .role-option:hover {
-  background: #f8f2ec;
+  background: #edf3ee;
 }
 
 .role-option input {
   margin-top: 3px;
 
-  accent-color: #8fb89b;
+  accent-color: #5b8068;
 }
 
 .role-option span {
@@ -211,13 +223,13 @@
 }
 
 .role-option strong {
-  color: #514a45;
+  color: #354139;
 
   font-size: 11px;
 }
 
 .role-option small {
-  color: #8a7d73;
+  color: #89958d;
 
   font-size: 10px;
 }
@@ -236,29 +248,40 @@
   border: none;
   border-radius: 8px;
 
-  background: #8fb89b;
+  background: #5b8068;
   color: #ffffff;
 
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
 
   cursor: pointer;
 
+  box-shadow:
+    0 4px 10px rgba(70, 105, 82, 0.14);
+
   transition:
     background 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .register-button:hover:not(:disabled) {
-  background: #789f84;
+  background: #486b55;
 
   transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 14px rgba(70, 105, 82, 0.18);
 }
 
 .register-button:disabled {
   opacity: 0.65;
 
   cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
 }
 
 /* =================================
@@ -270,7 +293,7 @@
 
   text-align: center;
 
-  color: #8a7d73;
+  color: #89958d;
 
   font-size: 11px;
 }
@@ -281,7 +304,7 @@
   border: none;
 
   background: transparent;
-  color: #a46f67;
+  color: #5b8068;
 
   font: inherit;
   font-weight: 700;
@@ -290,7 +313,9 @@
 }
 
 .register-login button:hover {
-  color: #865d5e;
+  color: #486b55;
+
+  text-decoration: underline;
 }
 
 /* =================================
