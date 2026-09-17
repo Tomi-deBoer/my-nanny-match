@@ -28,6 +28,14 @@ function Header() {
 
       <div className="header-actions">
 
+        <button
+          type="button"
+          className="header-about-button"
+          onClick={() => navigate("/about")}
+        >
+          About
+        </button>
+
         {isAdmin && (
           <button
             type="button"
